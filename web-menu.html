@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>menu</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <style>
+        html,
+        body {
+            background: #1e202f !important;
+            color: #FFF !important;
+        }
+.false {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.true {
+    color: #28a745;
+    border-color: #28a745;
+}
+    </style>
+</head>
+
+<body>
+
+    <h1>super cool menu</h1>
+    <p>Use buttons to toggle avaliable modules</p>
+    <hr>
+
+    <br>
+    <h3>Things</h3>
+    <button class="btn true" id="something1" onclick="toggle('something1')">something1</button>
+    <button class="btn true" id="something2" onclick="toggle('something2')">something2</button>
+    <button class="btn true" id="something_else" onclick="toggle('something_else')">something else</button>
+
+
+    <script>
+        setInterval(loadTelemetry, 1000)
+
+        function loadTelemetry(token) {
+            $.get(`http://127.0.0.1:3005/telemetry`, function (responseText) {
+                    let json = responseText;
+                    document.getElementById("something1").className = `btn ${json.settings.something1}`;
+                    document.getElementById("something2").className = `btn ${json.settings.something2}`;
+                    document.getElementById("something_else").className = `btn ${json.settings.something_else}`;
+                });
+        }
+        function toggle(module) {
+            console.log(module)
+            $.get(`http://127.0.0.1:3005/toggle?c=${module}`, function (responseText) {
+                console.log(`resp: ${responseText}`);
+            });
+        }
+    </script>
+
+
+    </div>
+
+    </div>
+
+</body>
+
+</html>
